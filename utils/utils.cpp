@@ -11,12 +11,9 @@ Lines read_file(const fs::path &file_path)
   }
 
   Lines lines;
-
   std::string line;
   while (std::getline(file_handle, line)) { lines.push_back(line); }
-
   file_handle.close();
-
   return lines;
 }
 
@@ -30,7 +27,8 @@ Lines &remove_empty_lines(Lines &lines)
 
 Lines &trim(Lines &lines)
 {
-  for (std::string &line : lines) { ltrim(rtrim(line)); }
+  std::for_each(
+    lines.begin(), lines.end(), [](std::string &line) { ltrim(rtrim(line)); });
   return lines;
 }
 
