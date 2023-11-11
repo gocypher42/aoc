@@ -22,6 +22,7 @@ Lines &remove_empty_lines(Lines &lines)
 {
   auto empty_lines = std::find_if(
     lines.begin(), lines.end(), [](std::string &line) { return line.empty(); });
+  lines.erase(lines.begin(), empty_lines);
   return lines;
 }
 
