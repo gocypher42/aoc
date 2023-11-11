@@ -1,7 +1,7 @@
-
 #include "utils.h"
 #include <algorithm>
 #include <fstream>
+#include <iomanip>
 
 Lines read_file(const fs::path &file_path)
 {
@@ -14,6 +14,8 @@ Lines read_file(const fs::path &file_path)
 
   std::string line;
   while (std::getline(file_handle, line)) { lines.push_back(line); }
+
+  file_handle.close();
 
   return lines;
 }

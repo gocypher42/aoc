@@ -1,13 +1,15 @@
 CC = g++
-CFLAGS = -g -Wall
-TARGET = utils
+CFLAGS = -g -Wall -std=c++17
+TARGET = libutils
 
-all: $(TARGET).o
+all: $(TARGET).a
 
+utils.o: utils.cpp 
+	$(CC) $(CFLAGS) -c utils.cpp 
 
-$(TARGET).o: $(TARGET).cpp ../utils/utils.h
-	$(CC) $(CFLAGS) -c $(TARGET).cpp 
+$(TARGET).a: utils.o
+	ar rcs $(TARGET).a utils.o
 
 clean:
-	$(RM) $(TARGET).o $(TARGET)
+	$(RM) *.o *.a
 

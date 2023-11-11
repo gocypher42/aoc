@@ -1,18 +1,18 @@
-TARGET = day1
-
 CC = g++
-CFLAGS = -g -Wall
+CFLAGS = -g -Wall -std=c++17
+
+TARGET = day1
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET).o utils.o
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).o ../utils/utils.o
+$(TARGET): $(TARGET).o libutils.a
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).o -L../utils -lutils
 
 $(TARGET).o: $(TARGET).cpp ../utils/utils.h
-	$(CC) $(CFLAGS) -c $(TARGET).cpp 
+	$(CC) $(CFLAGS) -c $(TARGET).cpp
 
-utils.o:
-	+$(MAKE) -C ../utils
+libutils.a:
+	$(MAKE) -C ../utils
 
 clean:
-	$(RM) $(TARGET).o $(TARGET)
+	$(RM) *.o $(TARGET)
