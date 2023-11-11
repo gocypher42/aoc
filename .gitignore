@@ -2,3 +2,6 @@
 build
 *.o
 *.a
+
+# days binary
+day1
