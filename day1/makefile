@@ -1,7 +1,9 @@
 CC = g++
 CFLAGS = -g -Wall -std=c++17
 
-TARGET = day1
+mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
+current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
+TARGET = $(current_dir)
 
 all: $(TARGET)
 

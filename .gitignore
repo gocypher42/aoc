@@ -2,6 +2,4 @@
 build
 *.o
 *.a
-
-# days binary
-2022-day1/day1
+*.bin
