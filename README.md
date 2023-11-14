@@ -1,4 +1,4 @@
-# aoc-2023
-My take on aoc 2023 with c++
+# aoc
+My take on aoc with c++
 
-https://adventofcode.com/2023
+https://adventofcode.com
