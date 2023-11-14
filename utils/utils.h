@@ -14,4 +14,6 @@ Lines &trim(Lines &lines);
 std::string &ltrim(std::string &line);
 std::string &rtrim(std::string &line);
 
+void print_lines(const Lines& lines);
+
 

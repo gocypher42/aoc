@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <fstream>
 #include <iomanip>
+#include <iostream>
 
 Lines read_file(const fs::path &file_path)
 {
@@ -48,4 +49,11 @@ std::string &rtrim(std::string &line)
   });
   line.erase(iterator.base(), line.end());
   return line;
+}
+
+void print_lines(const Lines &lines)
+{
+  std::for_each(lines.cbegin(), lines.cend(), [](const std::string &line) {
+    std::cout << line << std::endl;
+  });
 }
