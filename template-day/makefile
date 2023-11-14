@@ -10,11 +10,11 @@ all: $(TARGET)
 $(TARGET): $(TARGET).o libutils.a
 	$(CC) $(CFLAGS) -o $(TARGET).bin $(TARGET).o -L../utils -lutils
 
-$(TARGET).o: $(TARGET).cpp ../utils/utils.h
+$(TARGET).o: $(TARGET).cpp ../../utils/utils.h
 	$(CC) $(CFLAGS) -c $(TARGET).cpp
 
 libutils.a:
-	$(MAKE) -C ../utils
+	$(MAKE) -C ../../utils
 
 clean:
 	$(RM) *.o *.bin
