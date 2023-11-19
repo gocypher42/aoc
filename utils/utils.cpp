@@ -20,9 +20,13 @@ Lines read_file(const fs::path &file_path)
 
 Lines &remove_empty_lines(Lines &lines)
 {
-  auto empty_lines = std::find_if(
-    lines.begin(), lines.end(), [](std::string &line) { return line.empty(); });
-  lines.erase(lines.begin(), empty_lines);
+  std::vector<std::size_t> id_to_remove;
+  for (std::size_t i = 0; i < lines.size(); i++) {
+    if (lines[i].empty()) {
+      lines.erase(lines.begin() + static_cast<int>(i));
+      i--;
+    }
+  }
   return lines;
 }
 
@@ -54,6 +58,6 @@ std::string &rtrim(std::string &line)
 void print_lines(const Lines &lines)
 {
   std::for_each(lines.cbegin(), lines.cend(), [](const std::string &line) {
-    std::cout << line << std::endl;
+    std::cout << "'" << line << "'" << std::endl;
   });
 }
