@@ -3,7 +3,6 @@
 #include <string>
 #include <cassert>
 
-using std::string;
 using og::StringList;
 
 static constexpr const char *file_name = "input.txt";
