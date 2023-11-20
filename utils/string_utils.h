@@ -6,7 +6,7 @@ using std::string;
 
 namespace og {
 
-  string &ltrim(string &line);
-  string &rtrim(string &line);
+string &ltrim(string &line);
+string &rtrim(string &line);
   
 }
