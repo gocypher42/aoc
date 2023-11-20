@@ -1,0 +1,29 @@
+#pragma once
+
+#include <filesystem>
+#include <string>
+#include <vector>
+
+namespace fs = std::filesystem;
+
+using std::string;
+using std::vector;
+
+namespace og {
+
+string &ltrim(string &line);
+string &rtrim(string &line);
+
+class StringList : public vector<string>
+{
+public:
+  StringList() = default;
+  explicit StringList(const fs::path &file_path);
+
+  void read_from_file(const fs::path &file_path);
+  void remove_empty_lines();
+  void trim();
+  void print_lines() const;
+};
+
+}// namespace og

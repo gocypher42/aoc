@@ -1,27 +1,27 @@
-#include "../../utils/utils.h"
+#include "../../utils/string_list.h"
 #include <algorithm>
 #include <filesystem>
 #include <iostream>
 #include <string>
 #include <vector>
 
-namespace fs = std::filesystem;
+using namespace og;
 
 static constexpr const char *file_name = "input.txt";
 
-void first_part(const Lines &lines);
-void second_part(const Lines &lines);
+void first_part(const StringList &lines);
+void second_part(const StringList &lines);
 
 int main()
 {
-  Lines lines = read_file(fs::path(file_name));
+  StringList lines = StringList(fs::path(file_name));
   first_part(lines);
   second_part(lines);
 
   return 0;
 }
 
-void first_part(const Lines &lines)
+void first_part(const StringList &lines)
 {
   std::vector<size_t> elfs;
 
@@ -40,7 +40,7 @@ void first_part(const Lines &lines)
             << *std::max_element(elfs.cbegin(), elfs.cend()) << std::endl;
 }
 
-void second_part(const Lines &lines)
+void second_part(const StringList &lines)
 {
   std::vector<size_t> elfs;
 

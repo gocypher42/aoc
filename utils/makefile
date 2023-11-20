@@ -1,14 +1,18 @@
 CC = g++
 CFLAGS = -g -Wall -std=c++17
 TARGET = libutils
+HEADERS = string_list.h
+OBJS = string_list.o
 
 all: $(TARGET).a
 
-utils.o: utils.cpp 
-	$(CC) $(CFLAGS) -c utils.cpp 
+$(TARGET).a: $(OBJS)
+	ar rcs $(TARGET).a $(OBJS)
 
-$(TARGET).a: utils.o
-	ar rcs $(TARGET).a utils.o
+%.o: %.cpp $(HEADERS)
+	$(CC) $(CFLAGS) -c -o $@ $< 
+
+.PHONY: clean
 
 clean:
 	$(RM) *.o *.a
