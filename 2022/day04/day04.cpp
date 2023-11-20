@@ -1,25 +1,26 @@
-#include "../../utils/utils.h"
+#include "../../utils/string_list.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
 
-namespace fs = std::filesystem;
+using std::tuple;
+using og::StringList;
 
 static constexpr const char *file_name = "input.txt";
 static constexpr const char *correct_first_part_answer = "595";
 static constexpr const char *correct_second_part_answer = "952";
 
-std::string first_part(const Lines &lines);
-std::string second_part(const Lines &lines);
+string first_part(const StringList &lines);
+string second_part(const StringList &lines);
 
 int main()
 {
-  Lines lines = read_file(fs::path(file_name));
+  StringList lines((fs::path(file_name)));
 
-  std::string first_part_answer = first_part(lines);
+  string first_part_answer = first_part(lines);
   std::cout << "First part answer: " << first_part_answer << std::endl;
 
-  std::string second_part_answer = second_part(lines);
+  string second_part_answer = second_part(lines);
   std::cout << "Second part answer: " << second_part_answer << std::endl;
 
   assert(first_part_answer == correct_first_part_answer);
@@ -28,14 +29,11 @@ int main()
   return 0;
 }
 
-using std::string;
-using std::tuple;
-
 tuple<string, string> split(const string &line, const char delimiter)
 {
-  const auto split_id = line.find(delimiter);
-  const std::string list1 = line.substr(0, split_id);
-  const std::string list2 = line.substr(split_id + 1, line.length());
+  const std::size_t split_id = line.find(delimiter);
+  const string list1 = line.substr(0, split_id);
+  const string list2 = line.substr(split_id + 1, line.length());
   return { list1, list2 };
 }
 
@@ -46,7 +44,7 @@ tuple<int, int> split_to_int(const string &line, const char delimiter)
 }
 
 
-std::string first_part(const Lines &lines)
+string first_part(const StringList &lines)
 {
   std::size_t count = 0;
   std::for_each(
@@ -63,7 +61,7 @@ std::string first_part(const Lines &lines)
   return std::to_string(count);
 }
 
-std::string second_part(const Lines &lines)
+string second_part(const StringList &lines)
 {
   std::size_t count = 0;
   std::for_each(

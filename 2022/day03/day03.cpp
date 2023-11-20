@@ -1,25 +1,25 @@
-#include "../../utils/utils.h"
+#include "../../utils/string_list.h"
 #include <algorithm>
 #include <iostream>
 #include <cassert>
 
-namespace fs = std::filesystem;
+using og::StringList;
 
 static constexpr const char *file_name = "input.txt";
 static constexpr const char *correct_first_part_answer = "8298";
 static constexpr const char *correct_second_part_answer = "2708";
 
-std::string first_part(const Lines &lines);
-std::string second_part(const Lines &lines);
+std::string first_part(const StringList &lines);
+std::string second_part(const StringList &lines);
 
 int main()
 {
-  Lines lines = read_file(fs::path(file_name));
+  StringList lines((fs::path(file_name)));
 
-  std::string first_part_answer = first_part(lines);
+  string first_part_answer = first_part(lines);
   std::cout << "First part answer: " << first_part_answer << std::endl;
 
-  std::string second_part_answer = second_part(lines);
+  string second_part_answer = second_part(lines);
   std::cout << "Second part answer: " << second_part_answer << std::endl;
 
   assert(first_part_answer == correct_first_part_answer);
@@ -28,9 +28,9 @@ int main()
   return 0;
 }
 
-std::string overlap(const std::string &str1, const std::string &str2)
+string overlap(const string &str1, const string &str2)
 {
-  std::string chars;
+  string chars;
   for (const char char1 : str1) {
     for (const char char2 : str2) {
       if (char1 == char2) { chars.push_back(char1); }
@@ -39,7 +39,7 @@ std::string overlap(const std::string &str1, const std::string &str2)
   return chars;
 }
 
-std::string first_part(const Lines &lines)
+string first_part(const StringList &lines)
 {
   int sum = 0;
   std::for_each(lines.cbegin(), lines.cend(), [&sum](const std::string &line) {
@@ -53,14 +53,12 @@ std::string first_part(const Lines &lines)
   return std::to_string(sum);
 }
 
-std::string second_part(const Lines &lines)
+string second_part(const StringList &lines)
 {
-  using std::vector;
-
-  vector<Lines> groups;
+  vector<StringList> groups;
 
   for (size_t i = 0; i < lines.size(); i += 3) {
-    Lines group;
+    StringList group;
     for (size_t j = 0; j < 3; j++) { group.push_back(lines[i + j]); }
     groups.push_back(group);
   }
@@ -68,9 +66,9 @@ std::string second_part(const Lines &lines)
   int sum = 0;
 
   std::for_each(groups.cbegin(), groups.cend(), [&sum](const auto &group) {
-    const std::string &bag1 = group[0];
-    const std::string &bag2 = group[1];
-    const std::string &bag3 = group[2];
+    const string &bag1 = group[0];
+    const string &bag2 = group[1];
+    const string &bag3 = group[2];
 
     const char token = overlap(overlap(bag1, bag2), bag3).at(0);
     sum += token > 96 ? token - 96 : token - 38;

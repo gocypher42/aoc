@@ -22,7 +22,7 @@ public:
 
   void read_from_file(const fs::path &file_path);
   void remove_empty_lines();
-  void trim();
+  void trim_lines();
   void print_lines() const;
 };
 

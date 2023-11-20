@@ -11,7 +11,7 @@ all: $(TARGET)
 $(TARGET): $(TARGET).o libutils.a
 	$(CC) $(CFLAGS) -o $(TARGET).bin $(TARGET).o -L$(utils_dir) -lutils
 
-$(TARGET).o: $(TARGET).cpp $(utils_dir)/utils.h
+$(TARGET).o: $(TARGET).cpp $(utils_dir)/string_list.h
 	$(CC) $(CFLAGS) -c $(TARGET).cpp
 
 libutils.a:

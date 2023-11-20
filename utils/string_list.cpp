@@ -49,7 +49,7 @@ void StringList::remove_empty_lines()
   }
 }
 
-void StringList::trim()
+void StringList::trim_lines()
 {
   for (string &line : *this) { ltrim(rtrim(line)); }
 }
