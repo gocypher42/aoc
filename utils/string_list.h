@@ -11,7 +11,6 @@ using std::vector;
 
 namespace og {
 
-
 class StringList : public vector<string>
 {
 public:
