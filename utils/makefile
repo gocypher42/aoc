@@ -1,8 +1,8 @@
 CC = g++
 CFLAGS = -g -Wall -std=c++17
 TARGET = libutils
-HEADERS = string_list.h
-OBJS = string_list.o
+HEADERS = string_list.h string_utils.h
+OBJS = string_list.o string_utils.o
 
 all: $(TARGET).a
 

@@ -11,8 +11,6 @@ using std::vector;
 
 namespace og {
 
-string &ltrim(string &line);
-string &rtrim(string &line);
 
 class StringList : public vector<string>
 {
