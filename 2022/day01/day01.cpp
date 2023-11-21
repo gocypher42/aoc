@@ -5,7 +5,7 @@
 #include <string>
 #include <vector>
 
-using namespace og;
+using og::StringList;
 
 static constexpr const char *file_name = "input.txt";
 
