@@ -9,8 +9,8 @@ static constexpr const char *file_name = "input.txt";
 static constexpr const char *correct_first_part_answer = "8298";
 static constexpr const char *correct_second_part_answer = "2708";
 
-std::string first_part(const StringList &lines);
-std::string second_part(const StringList &lines);
+string first_part(const StringList &lines);
+string second_part(const StringList &lines);
 
 int main()
 {
