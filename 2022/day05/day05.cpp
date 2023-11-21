@@ -1,4 +1,4 @@
-#include "../../utils/utils.h"
+#include "string_list.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -7,18 +7,18 @@
 #include <string>
 #include <vector>
 
-using std::string;
+using og::StringList;
 
 static constexpr const char *file_name = "input.txt";
 static constexpr const char *correct_first_part_answer = "RNZLFZSJH";
 static constexpr const char *correct_second_part_answer = "CNSFCGJSM";
 
-string first_part(const Lines &lines);
-string second_part(const Lines &lines);
+string first_part(const StringList &lines);
+string second_part(const StringList &lines);
 
 int main()
 {
-  const Lines lines = read_file(fs::path(file_name));
+  const StringList lines((fs::path(file_name)));
 
   const string first_part_answer = first_part(lines);
   std::cout << "First part answer: " << first_part_answer << std::endl;
@@ -51,7 +51,7 @@ void print_stacks(const std::map<size_t, std::stack<char>> &stacks)
   for (const auto &item : stacks) { print_stack(item.first, item.second); }
 }
 
-std::vector<string> split(string input_string, const string &delimiter)
+vector<string> split(string input_string, const string &delimiter)
 {
   std::vector<string> split_string;
   size_t pos = 0;
@@ -78,7 +78,7 @@ struct Move
   }
 };
 
-void print_moves(const std::vector<Move> &moves)
+void print_moves(const vector<Move> &moves)
 {
   for (const auto &move : moves) { move.print(); }
 }
@@ -88,27 +88,22 @@ void apply_moves_first_part(std::map<size_t, std::stack<char>> &stacks,
 {
   if (moves.empty()) { return; }
   std::cout << "Init state" << std::endl;
-  print_stacks(stacks);
   for (const auto &move : moves) {
-    move.print();
     for (size_t i = 0; i < move.crates_qty_to_move; i++) {
       if (stacks[move.id_from].empty()) { break; }
       stacks[move.id_to].push(stacks[move.id_from].top());
       stacks[move.id_from].pop();
     }
-    print_stacks(stacks);
   }
 }
 
 void apply_moves_second_part(std::map<size_t, std::stack<char>> &stacks,
-  const std::vector<Move> &moves)
+  const vector<Move> &moves)
 {
   if (moves.empty()) { return; }
   std::cout << "Init state" << std::endl;
-  print_stacks(stacks);
 
   for (const auto &move : moves) {
-    move.print();
     std::stack<char> temp_stack;
     for (size_t i = 0; i < move.crates_qty_to_move; i++) {
       if (stacks[move.id_from].empty()) { break; }
@@ -116,28 +111,26 @@ void apply_moves_second_part(std::map<size_t, std::stack<char>> &stacks,
       stacks[move.id_from].pop();
     }
 
-    while(!temp_stack.empty()){
+    while (!temp_stack.empty()) {
       stacks[move.id_to].push(temp_stack.top());
       temp_stack.pop();
     }
-    print_stacks(stacks);
   }
 }
 
 
-string first_part(const Lines &lines)
+string first_part(const StringList &lines)
 {
   const auto seperator_for_crates = std::find_if(lines.cbegin(),
     lines.cend(),
     [](const auto &item) { return item.at(1) == '1'; });
 
-  const Lines stack_lines(lines.cbegin(),
-    lines.cbegin() + 1 + (seperator_for_crates - lines.cbegin()));
+  const StringList stack_lines(vector(lines.cbegin(),
+    lines.cbegin() + 1 + (seperator_for_crates - lines.cbegin())));
 
-  const Lines move_lines(
-    lines.cbegin() + 2 + (seperator_for_crates - lines.cbegin()), lines.cend());
-
-  // print_lines(stack_lines);
+  const StringList move_lines(
+    vector(lines.cbegin() + 2 + (seperator_for_crates - lines.cbegin()),
+      lines.cend()));
 
   const string &stack_numbers_line = stack_lines.back();
 
@@ -159,11 +152,7 @@ string first_part(const Lines &lines)
     stacks.insert(std::pair<size_t, std::stack<char>>(crate_id, stack));
   }
 
-  // print_lines(move_lines);
-
-  print_stacks(stacks);
-
-  std::vector<Move> moves;
+  vector<Move> moves;
 
   for (const auto &move_line : move_lines) {
     const auto split_line = split(move_line, " ");
@@ -173,8 +162,6 @@ string first_part(const Lines &lines)
     move.id_to = std::stoi(split_line.at(5));
     moves.push_back(move);
   }
-
-  print_moves(moves);
 
   apply_moves_first_part(stacks, moves);
 
@@ -185,19 +172,18 @@ string first_part(const Lines &lines)
   return answer;
 }
 
-string second_part(const Lines &lines)
+string second_part(const StringList &lines)
 {
   const auto seperator_for_crates = std::find_if(lines.cbegin(),
     lines.cend(),
     [](const auto &item) { return item.at(1) == '1'; });
 
-  const Lines stack_lines(lines.cbegin(),
-    lines.cbegin() + 1 + (seperator_for_crates - lines.cbegin()));
+  const StringList stack_lines(vector(lines.cbegin(),
+    lines.cbegin() + 1 + (seperator_for_crates - lines.cbegin())));
 
-  const Lines move_lines(
-    lines.cbegin() + 2 + (seperator_for_crates - lines.cbegin()), lines.cend());
-
-  // print_lines(stack_lines);
+  const StringList move_lines(
+    vector(lines.cbegin() + 2 + (seperator_for_crates - lines.cbegin()),
+      lines.cend()));
 
   const string &stack_numbers_line = stack_lines.back();
 
@@ -219,11 +205,7 @@ string second_part(const Lines &lines)
     stacks.insert(std::pair<size_t, std::stack<char>>(crate_id, stack));
   }
 
-  // print_lines(move_lines);
-
-  print_stacks(stacks);
-
-  std::vector<Move> moves;
+  vector<Move> moves;
 
   for (const auto &move_line : move_lines) {
     const auto split_line = split(move_line, " ");
@@ -233,8 +215,6 @@ string second_part(const Lines &lines)
     move.id_to = std::stoi(split_line.at(5));
     moves.push_back(move);
   }
-
-  print_moves(moves);
 
   apply_moves_second_part(stacks, moves);
 

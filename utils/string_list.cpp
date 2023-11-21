@@ -8,6 +8,12 @@ namespace og {
 
 StringList::StringList(const fs::path &file_path) { read_from_file(file_path); }
 
+StringList::StringList(const vector<string> &list)
+{
+  clear();
+  for (const string &item : list) { emplace_back(item); }
+}
+
 void StringList::read_from_file(const fs::path &file_path)
 {
   std::ifstream file_handle(file_path);
@@ -36,7 +42,6 @@ void StringList::trim_lines()
 {
   for (string &line : *this) { ltrim(rtrim(line)); }
 }
-
 
 void StringList::print_lines() const
 {

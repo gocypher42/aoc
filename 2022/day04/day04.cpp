@@ -1,4 +1,4 @@
-#include "../../utils/string_list.h"
+#include "string_list.h"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
