@@ -4,7 +4,7 @@ project(aoc_utils
         LANGUAGES CXX
         VERSION 1.0)
 
-include(../cmake/compile_flags.cmake)
+include(../cmake/compiler_options.cmake)
 
 add_library(utils STATIC string_list.cpp string_utils.cpp)
 
