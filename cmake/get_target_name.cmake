@@ -1,0 +1,5 @@
+function(get_target_name)
+    get_filename_component(DIR_ONE_ABOVE ./ ABSOLUTE)
+    cmake_path(GET DIR_ONE_ABOVE FILENAME TARGET)
+    set(TARGET ${TARGET} PARENT_SCOPE)
+endfunction()

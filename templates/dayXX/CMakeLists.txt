@@ -1,13 +1,17 @@
-cmake_minimum_required(VERSION 3.16.3)
+set(OG_CMAKE_PATH ../../cmake)
 
-get_filename_component(DIR_ONE_ABOVE ./ ABSOLUTE)
-cmake_path(GET DIR_ONE_ABOVE FILENAME TARGET)
+include(${OG_CMAKE_PATH}/cmake_min_ver.cmake)
+
+include(${OG_CMAKE_PATH}/compiler_options.cmake)
+include(${OG_CMAKE_PATH}/get_target_name.cmake)
+
+cmake_minimum_required(VERSION ${OG_MIN_CMAKE_VER})
+
+get_target_name()
 
 project(${TARGET}
         LANGUAGES CXX
         VERSION 1.0)
-
-include(../../cmake/compiler_options.cmake)
 
 set(UTILS_PATH ../../utils)
 
