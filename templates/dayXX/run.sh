@@ -1,7 +1,7 @@
 filepath=$(pwd)
 target="$(basename "$filepath")"
 
-if [ -f dayXX.cpp ]; then
+if [ -f dayXX.cpp ] && [ "$target" != "dayXX" ]; then
 	rm "$target.cpp"
 	mv dayXX.cpp "$target.cpp"
 fi
