@@ -7,7 +7,7 @@ project(${TARGET}
         LANGUAGES CXX
         VERSION 1.0)
 
-include(../../cmake/compile_flags.cmake)
+include(../../cmake/compiler_options.cmake)
 
 set(UTILS_PATH ../../utils)
 
