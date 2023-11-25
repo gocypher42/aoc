@@ -22,4 +22,16 @@ string &rtrim(string &line)
   return line;
 }
 
+StringList split(string line, const string &delimiter)
+{
+  StringList split_string;
+  size_t pos = 0;
+  while ((pos = line.find(delimiter)) != std::string::npos) {
+    split_string.push_back(line.substr(0, pos));
+    line.erase(0, pos + delimiter.length());
+  }
+  split_string.push_back(line);
+  return split_string;
 }
+
+}// namespace og

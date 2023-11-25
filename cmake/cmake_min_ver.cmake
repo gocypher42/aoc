@@ -1,2 +1,2 @@
-set(OG_MIN_CMAKE_VER 3.27.1)
+set(OG_MIN_CMAKE_VER 3.22.1)
 
