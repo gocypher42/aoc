@@ -22,8 +22,8 @@ int main()
   const string second_part_answer = second_part(lines);
   std::cout << "Second part answer: " << second_part_answer << std::endl;
 
-  // assert(first_part_answer == correct_first_part_answer);
-  // assert(second_part_answer == correct_second_part_answer);
+  assert(first_part_answer == correct_first_part_answer);
+  assert(second_part_answer == correct_second_part_answer);
 
   return 0;
 }
