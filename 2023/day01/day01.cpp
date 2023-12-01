@@ -1,7 +1,9 @@
 #include "string_list.h"
-#include <iostream>
-#include <string>
+#include <algorithm>
 #include <cassert>
+#include <iostream>
+#include <numeric>
+#include <string>
 
 using og::StringList;
 
@@ -28,120 +30,101 @@ int main()
   return 0;
 }
 
-string first_part(const StringList &lines)
+bool is_digit(char token)
 {
-  int sum = 0;
-  for (const string& line: lines){
-    int first_number = 0;
-    int last_number = 0;
-    
-    for (char i : line){
-      const int char_value = i - '0';
-      if (char_value >=0 && char_value <= 9){
-        first_number = char_value;
-        break;
-      }
-    }
-
-    for (int i =line.size()-1 ; i >=0; i--){
-      const int char_value = line.at(i) - '0';
-      if (char_value >=0 && char_value <= 9){
-        last_number = char_value;
-        break;
-      }
-    }
-    const string str_value (std::to_string(first_number) + std::to_string(last_number));
-    sum += std::stoi(str_value);
-  }
-  return std::to_string(sum);
-}
-
-bool is_digit(char token){
-  const int char_value = token- '0';
-  if (char_value >=0 && char_value <= 9){
-    return true;
-  }
+  const int char_value = token - '0';
+  if (char_value >= 0 && char_value <= 9) { return true; }
 
   return false;
 }
 
-int to_digit(const string& token)
+int to_digit(char token)
 {
-  if (token.find("one") != std::string::npos)
-  {
-    return 1;
+  const int token_value = token - '0';
+  if (token_value >= 0 && token_value <= 9) { return token_value; }
+  return 0;
+}
+
+string first_part(const StringList &lines)
+{
+  vector<int> calibrations;
+  for (const string &line : lines) {
+    vector<int> numbers;
+
+    for (char token : line) {
+      if (is_digit(token)) {
+        numbers.push_back(to_digit(token));
+      }
+    }
+
+    calibrations.push_back(numbers.front()*10 + numbers.back());
   }
-  if (token.find("two") != std::string::npos)
-  {
-    return 2;
-  }
-  if (token.find("three") != std::string::npos)
-  {
-    return 3;
-  }
-  if (token.find("four") != std::string::npos)
-  {
-    return 4;
-  }
-  if (token.find("five") != std::string::npos)
-  {
-    return 5;
-  }
-  if (token.find("six") != std::string::npos)
-  {
-    return 6;
-  }
-  if (token.find("seven") != std::string::npos)
-  {
-    return 7;
-  }
-  if (token.find("eight") != std::string::npos)
-  {
-    return 8;
-  }
-  if (token.find("nine") != std::string::npos)
-  {
-    return 9;
+  return std::to_string(
+    std::accumulate(calibrations.cbegin(), calibrations.cend(), 0));
+}
+
+
+struct WordToInt
+{
+  std::string word;
+  int value;
+};
+
+int to_digit(const string &token)
+{
+  const std::vector<WordToInt> map = {
+    { "one", 1 },
+    { "two", 2 },
+    { "three", 3 },
+    { "four", 4 },
+    { "five", 5 },
+    { "six", 6 },
+    { "seven", 7 },
+    { "eight", 8 },
+    { "nine", 9 },
+  };
+
+  for (const auto &item : map) {
+    if (token.find(item.word) != std::string::npos) { return item.value; }
   }
   return 0;
 }
 
 string second_part(const StringList &lines)
 {
-  int sum = 0;
-  for (const string& line: lines){
+  vector<int> calibrations;
+  for (const string &line : lines) {
     int first_number = 0;
     int last_number = 0;
 
-    
-    for (int i = 0; i < line.size() ; i++){
-      if (is_digit(line.at(i))){
+
+    for (int i = 0; i < line.size(); i++) {
+      if (is_digit(line.at(i))) {
         first_number = line.at(i) - '0';
         break;
       }
 
-      const int value = to_digit(line.substr(0, i+1));
-      if (value != 0){
+      const int value = to_digit(line.substr(0, i + 1));
+      if (value != 0) {
         first_number = value;
         break;
       }
     }
 
-    for (int i = line.size() -1; i >=0 ; i--){
-      if (is_digit(line.at(i))){
+    for (int i = line.size() - 1; i >= 0; i--) {
+      if (is_digit(line.at(i))) {
         last_number = line.at(i) - '0';
         break;
       }
 
-      const int value = to_digit(line.substr(i, line.size()-i));
-      if (value != 0){
+      const int value = to_digit(line.substr(i, line.size() - i));
+      if (value != 0) {
         last_number = value;
         break;
       }
-     }
+    }
 
-    const string str_value (std::to_string(first_number) + std::to_string(last_number));
-    sum += std::stoi(str_value);
+    calibrations.push_back(first_number*10 + last_number);
   }
-  return std::to_string(sum);
+  return std::to_string(std::accumulate(calibrations.cbegin(), calibrations.cend(), 0));
 }
