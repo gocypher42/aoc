@@ -6,7 +6,7 @@
 using og::StringList;
 
 static constexpr const char *file_name = "input.txt";
-static constexpr const char *correct_first_part_answer = "Not the right ans";
+static constexpr const char *correct_first_part_answer = "54940";
 static constexpr const char *correct_second_part_answer = "Not the right ans";
 
 string first_part(const StringList &lines);
