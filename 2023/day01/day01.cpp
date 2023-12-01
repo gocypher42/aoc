@@ -31,11 +31,35 @@ int main()
 string first_part(const StringList &lines)
 {
   lines.print_lines();
-  return "0";
+  int sum = 0;
+  for (const string& line: lines){
+    int first_number = 0;
+    int last_number = 0;
+    
+    for (char i : line){
+      const int char_value = i - '0';
+      if (char_value >=0 && char_value <= 9){
+        first_number = char_value;
+      }
+    }
+
+    for (int i =line.size()-1 ; i >=0; i--){
+      const int char_value = line.at(i) - '0';
+      if (char_value >=0 && char_value <= 9){
+        last_number = char_value;
+      }
+    }
+
+
+    std::cout << last_number << first_number << std::endl;
+    string str_value;
+    str_value.append(std::to_string(last_number)).append(std::to_string(first_number));
+    sum += std::stoi(str_value);
+  }
+  return std::to_string(sum);
 }
 
 string second_part(const StringList &lines)
 {
-  lines.print_lines();
   return "0";
 }
