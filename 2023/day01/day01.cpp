@@ -52,12 +52,10 @@ string first_part(const StringList &lines)
     vector<int> numbers;
 
     for (char token : line) {
-      if (is_digit(token)) {
-        numbers.push_back(to_digit(token));
-      }
+      if (is_digit(token)) { numbers.push_back(to_digit(token)); }
     }
 
-    calibrations.push_back(numbers.front()*10 + numbers.back());
+    calibrations.push_back(numbers.front() * 10 + numbers.back());
   }
   return std::to_string(
     std::accumulate(calibrations.cbegin(), calibrations.cend(), 0));
@@ -124,7 +122,8 @@ string second_part(const StringList &lines)
       }
     }
 
-    calibrations.push_back(first_number*10 + last_number);
+    calibrations.push_back(first_number * 10 + last_number);
   }
-  return std::to_string(std::accumulate(calibrations.cbegin(), calibrations.cend(), 0));
+  return std::to_string(
+    std::accumulate(calibrations.cbegin(), calibrations.cend(), 0));
 }
