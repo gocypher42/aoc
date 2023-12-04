@@ -6,8 +6,11 @@
 #include <numeric>
 #include <string>
 
-using std::accumulate;
+namespace fs = std::filesystem;
+
 using og::StringList;
+using std::vector;
+using std::string;
 
 static constexpr const char *file_name = "input.txt";
 static constexpr const char *correct_first_part_answer = "20117";
@@ -53,10 +56,9 @@ public:
   vector<uint64_t> m_winning_numbers;
 };
 
-string first_part(const StringList &lines)
+vector<Card> parse_cards(const StringList &lines)
 {
   vector<Card> cards;
-  lines.print_lines();
   for (const string &line : lines) {
     const StringList title_and_numbers = og::split(line, ": ");
     StringList title_split = og::split(title_and_numbers.at(0), " ");
@@ -85,9 +87,14 @@ string first_part(const StringList &lines)
     }
     std::sort(card.m_numbers.begin(), card.m_numbers.end());
     std::sort(card.m_winning_numbers.begin(), card.m_winning_numbers.end());
-    card.print();
     cards.push_back(card);
   }
+  return cards;
+}
+
+string first_part(const StringList &lines)
+{
+  const vector<Card> cards = parse_cards(lines);
 
   vector<uint64_t> cards_point;
   for (const auto &card : cards) {
@@ -113,6 +120,27 @@ string first_part(const StringList &lines)
 
 string second_part(const StringList &lines)
 {
-  // lines.print_lines();
+  const vector<Card> cards = parse_cards(lines);
+
+  vector<uint64_t> cards_point;
+  for (const auto &card : cards) {
+    uint64_t points = 0;
+    for (const uint64_t &card_number : card.m_numbers) {
+      for (const uint64_t &winning_number : card.m_winning_numbers) {
+        if (card_number == winning_number) {
+          if (points == 0U) {
+            points = 1;
+          } else {
+            points *= 2;
+          }
+          break;
+        }
+      }
+    }
+    cards_point.push_back(points);
+  }
+
+  return std::to_string(
+    accumulate(cards_point.cbegin(), cards_point.cend(), (uint64_t)0));
   return "0";
 }
