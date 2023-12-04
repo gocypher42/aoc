@@ -49,4 +49,5 @@ void StringList::print_lines() const
     std::cout << "'" << line << "'" << std::endl;
   }
 }
+
 }// namespace og
