@@ -53,8 +53,6 @@ constexpr uint64_t MAX_GREEN_CUBE = 13;
 
 vector<Game> parse_games(const StringList &lines)
 {
-
-
   vector<Game> games;
   for (const string &line : lines) {
     const StringList game_and_rounds = og::split(line, ": ");
