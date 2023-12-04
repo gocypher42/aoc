@@ -3,6 +3,7 @@ target="$(basename "$filepath")"
 
 if [ -f dayXX.cpp ] && [ "$target" != "dayXX" ]; then
 	rm -f "$target.cpp"
+ 	rm -drf build
 	mv dayXX.cpp "$target.cpp"
 fi
 
