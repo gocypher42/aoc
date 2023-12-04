@@ -3,11 +3,14 @@
 #include <algorithm>
 #include <cassert>
 #include <iostream>
+#include <numeric>
+#include <string>
 
+using std::accumulate;
 using og::StringList;
 
 static constexpr const char *file_name = "input.txt";
-static constexpr const char *correct_first_part_answer = "Not the right ans";
+static constexpr const char *correct_first_part_answer = "20117";
 static constexpr const char *correct_second_part_answer = "Not the right ans";
 
 string first_part(const StringList &lines);
@@ -57,8 +60,10 @@ string first_part(const StringList &lines)
   lines.print_lines();
   for (const string &line : lines) {
     const StringList title_and_numbers = og::split(line, ": ");
-    const uint64_t card_id =
-      std::stoll(og::split(title_and_numbers.at(0), " ").at(1));
+    StringList title_split = og::split(title_and_numbers.at(0), " ");
+    title_split.remove_empty_lines();
+
+    const uint64_t card_id = std::stoull(title_split.at(1));
     const StringList numbers_and_winnings =
       og::split(title_and_numbers.at(1), " | ");
 
@@ -85,8 +90,26 @@ string first_part(const StringList &lines)
     cards.push_back(card);
   }
 
+  vector<uint64_t> cards_point;
+  for (const auto &card : cards) {
+    uint64_t points = 0;
+    for (const uint64_t &card_number : card.m_numbers) {
+      for (const uint64_t &winning_number : card.m_winning_numbers) {
+        if (card_number == winning_number) {
+          if (points == 0U) {
+            points = 1;
+          } else {
+            points *= 2;
+          }
+          break;
+        }
+      }
+    }
+    cards_point.push_back(points);
+  }
 
-  return "0";
+  return std::to_string(
+    accumulate(cards_point.cbegin(), cards_point.cend(), (uint64_t)0));
 }
 
 string second_part(const StringList &lines)
