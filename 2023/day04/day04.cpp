@@ -13,7 +13,6 @@ static constexpr const char *correct_second_part_answer = "Not the right ans";
 string first_part(const StringList &lines);
 string second_part(const StringList &lines);
 
-
 int main()
 {
   const StringList lines((fs::path(file_name)));
