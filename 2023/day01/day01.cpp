@@ -5,7 +5,12 @@
 #include <numeric>
 #include <string>
 
+namespace fs = std::filesystem;
+
 using og::StringList;
+using std::string;
+using std::vector;
+
 
 static constexpr const char *file_name = "input.txt";
 static constexpr const char *correct_first_part_answer = "54940";
