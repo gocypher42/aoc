@@ -1,12 +1,16 @@
 #pragma once
 
+#include <cstddef>
+
 namespace og {
+
+/*** Implementation ***/
 
 template<typename T> class Vector
 {
 public:
   Vector() = default;
-  explicit Vector(int capacity, const T &def_value);
+  explicit Vector(size_t capacity, const T &def_value);
 
   Vector(const Vector &);
   Vector(Vector &&) noexcept;
@@ -16,41 +20,56 @@ public:
   ~Vector();
 
   void clear();
-  void resize(int capacity);
-  T &at(int index);
-  const T &at(int index) const;
+  void resize(const size_t capacity);
+  T &at(size_t index);
+  const T &at(size_t index) const;
 
-  [[nodiscard]] int size() const;
+  [[nodiscard]] size_t size() const;
 
 private:
-  int m_size{ 0 };
-  int m_capacity{ 0 };
-  int *m_data{ nullptr };
+  size_t m_size{ 0 };
+  size_t m_capacity{ 0 };
+  T *m_data{ nullptr };
 };
 
+/*** Definition ***/
+
 template<typename T>
-Vector<T>::Vector(int capacity, const T &def_value)
+Vector<T>::Vector(size_t capacity, const T &def_value)
   : m_size(capacity), m_capacity(capacity), m_data(new T[capacity])
 {
-  for (int i = 0; i < m_capacity; i++) { m_data[i] = def_value; }
+  for (size_t i = 0; i < m_capacity; i++) { m_data[i] = def_value; }
 }
 
 template<typename T> Vector<T>::~Vector() { clear(); }
 
-template<typename T> int Vector<T>::size() const { return m_size; }
+template<typename T> size_t Vector<T>::size() const { return m_size; }
 
-template<typename T> T &Vector<T>::at(const int index) { return m_data[index]; }
-
-template<typename T> const T &Vector<T>::at(const int index) const
+template<typename T> T &Vector<T>::at(const size_t index)
 {
   return m_data[index];
 }
 
+template<typename T> const T &Vector<T>::at(const size_t index) const
+{
+  return m_data[index];
+}
+
+template<typename T> void Vector<T>::resize(const size_t capacity)
+{
+  // T *new_data = new T[capacity];
+  // for (size_t i = 0; i < capacity; i++) {
+  //   if (i == m_size) { break; }
+  //   new_data[i] = m_data[i];
+  // }
+  // m_data = new_data;
+  //
+}
+
 template<typename T> void Vector<T>::clear()
 {
-  if (m_data){
-    delete[] m_data;
-  }
+  delete[] m_data;
+  m_data = nullptr;
   m_size = 0;
   m_capacity = 0;
 }
