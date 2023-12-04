@@ -4,12 +4,12 @@
 #include <string>
 #include <vector>
 
+namespace og {
+
 namespace fs = std::filesystem;
 
 using std::string;
 using std::vector;
-
-namespace og {
 
 class StringList : public vector<string>
 {
