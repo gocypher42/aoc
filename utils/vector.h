@@ -4,7 +4,7 @@
 
 namespace og {
 
-/*** Implementation ***/
+/*** Definition ***/
 
 template<typename T> class Vector
 {
@@ -32,7 +32,7 @@ private:
   T *m_data{ nullptr };
 };
 
-/*** Definition ***/
+/*** Implementation ***/
 
 template<typename T>
 Vector<T>::Vector(size_t capacity, const T &def_value)
