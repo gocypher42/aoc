@@ -1,6 +1,6 @@
 // Advent of Code 2023
 // Day1: Trebuchet?!
-// link: https://adventofcode.com/2023/day/1
+// https://adventofcode.com/2023/day/1
 
 #include "string_list.h"
 #include <algorithm>
