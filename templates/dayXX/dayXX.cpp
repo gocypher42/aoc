@@ -1,3 +1,7 @@
+// Advent of Code 2023
+// DayXX: [TITLE]
+// https://adventofcode.com/2023/day/XX
+
 #include "string_list.h"
 #include "string_utils.h"
 #include <iostream>
