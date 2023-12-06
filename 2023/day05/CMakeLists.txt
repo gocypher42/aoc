@@ -1,7 +1,6 @@
 set(OG_CMAKE_PATH ../../cmake)
 
 include(${OG_CMAKE_PATH}/cmake_min_ver.cmake)
-
 include(${OG_CMAKE_PATH}/compiler_options.cmake)
 include(${OG_CMAKE_PATH}/get_target_name.cmake)
 
