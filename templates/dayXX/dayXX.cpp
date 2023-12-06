@@ -21,8 +21,11 @@ int main()
 {
   const StringList lines((fs::path(file_name)));
 
-  std::cout << "First part answer: " << first_part(lines) << '\n';
-  std::cout << "Second part answer: " << second_part(lines) << '\n';
+  const string ans_part_1 = first_part(lines);
+  std::cout << "First part answer: " << ans_part_1 << '\n';
+  
+  const string ans_part_2 = second_part(lines);
+  std::cout << "Second part answer: " << ans_part_2 << '\n';
 
   return 0;
 }
