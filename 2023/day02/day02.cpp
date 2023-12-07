@@ -1,3 +1,7 @@
+// Advent of Code 2023
+// Day02: Cube Conundrum
+// https://adventofcode.com/2023/day/2
+
 #include "string_list.h"
 #include "string_utils.h"
 #include <cassert>
