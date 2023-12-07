@@ -1,3 +1,7 @@
+// Advent of Code 2023
+// Day03: Gear Ratios
+// https://adventofcode.com/2023/day/3
+
 #include "string_list.h"
 #include <algorithm>
 #include <cassert>
