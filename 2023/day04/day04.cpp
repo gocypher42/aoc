@@ -1,3 +1,7 @@
+// Advent of Code 2023
+// Day04: Scratchcards
+// https://adventofcode.com/2023/day/4
+
 #include "string_list.h"
 #include "string_utils.h"
 #include <algorithm>
