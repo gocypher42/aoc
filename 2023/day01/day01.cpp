@@ -15,6 +15,9 @@ using std::string;
 using std::vector;
 
 static constexpr const char *file_name = "input.txt";
+static constexpr uint32_t ZERO = 0;
+static constexpr uint32_t NINE = 9;
+static constexpr uint32_t TEN = 10;
 
 string first_part(const StringList &lines);
 string second_part(const StringList &lines);
@@ -28,10 +31,6 @@ int main()
 
   return 0;
 }
-
-constexpr uint32_t ZERO = 0;
-constexpr uint32_t NINE = 9;
-constexpr uint32_t TEN = 10;
 
 bool is_digit(char token)
 {
