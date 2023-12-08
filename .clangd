@@ -1,5 +1,5 @@
 CompileFlags:                     
-  Add: [-std=c++17]             
+  Add: [-xc++, -Wall, -std=c++17]          
 
 Diagnostics:
   UnusedIncludes: Strict
